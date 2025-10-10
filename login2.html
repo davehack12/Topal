@@ -1,0 +1,62 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Topal – Login</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+        <style>
+            /* 3D effect for the header */
+            .threeD {
+                font-size: 3rem;
+                font-weight: 900;
+                color: #fff;
+                text-align: center;
+                margin-bottom: 1rem;
+                text-shadow: 2px 2px 0 #000, 4px 4px 0 #333, 6px 6px 0 #666;
+            }
+        </style>
+    </head>
+    <body class="bg-gradient-to-br from-gray-900 to-black text-white min-h-screen flex flex-col items-center justify-center px-4">
+        <!-- 3D Styled Header -->
+        <h2 class="threeD">Topal Login</h2>
+        <div class="w-full max-w-md bg-gray-800 rounded-xl shadow-lg p-8">
+            <div class="flex justify-center mb-6">
+                <img src="https://storage.googleapis.com/a1aa/image/xFD_JWtV-HqPnu98kYXphREv8HUZ46FdpkJZ6TYqJRs.jpg" alt="Digital assets illustration" class="w-24 h-24 rounded-full"/>
+            </div>
+            <form action="https://example.com/authenticate" method="post" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-300">Email address</label>
+                    <input id="email" name="email" type="email" required
+                        class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500"/>
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
+                    <input id="password" name="password" type="password" required
+                        class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500"/>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox"
+                            class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-600 rounded">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-300">Remember me</label>
+                    </div>
+                    <div class="text-sm">
+                        <a href="forgot-password.html" class="font-medium text-green-500 hover:text-green-400">Forgot your password?</a>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="w-full bg-green-500 text-black py-3 rounded-full text-lg font-semibold hover:bg-green-600 transition">
+                        Sign In
+                    </button>
+                </div>
+            </form>
+            <div class="mt-6 text-center text-gray-500 text-xs">
+                <p>
+                    Don't have an account?
+                    <a href="signup.html" class="underline hover:text-white">Sign Up</a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,69 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Topal – Wallet Empty</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .glass {
+        backdrop-filter: blur(16px);
+        background: rgba(30, 30, 30, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white min-h-screen flex flex-col items-center justify-center px-4"
+  >
+    <div
+      class="glass rounded-2xl shadow-2xl p-8 w-full max-w-md text-center animate-fadeIn"
+    >
+      <div class="flex justify-center mb-6">
+        <div
+          class="bg-gray-800/70 p-6 rounded-full border border-gray-700 animate-[float_3s_ease-in-out_infinite]"
+        >
+          <i class="fas fa-wallet text-5xl text-gray-400"></i>
+        </div>
+      </div>
+
+      <h1 class="text-2xl font-bold mb-3">Wallet Empty</h1>
+      <p class="text-gray-400 mb-8">
+        Sorry, you can’t use this function right now — your wallet has no funds
+        available. Please make a deposit to continue.
+      </p>
+
+      <div class="space-y-3">
+        <button
+          onclick="window.location.href='receive.html'"
+          class="w-full py-3 bg-green-500 text-black rounded-full font-semibold text-lg hover:bg-green-400 transition"
+        >
+          <i class="fas fa-arrow-down mr-2"></i>Deposit Funds
+        </button>
+
+        <button
+          onclick="window.history.back()"
+          class="w-full py-3 bg-gray-800 text-white rounded-full font-semibold text-lg hover:bg-gray-700 transition"
+        >
+          <i class="fas fa-arrow-left mr-2"></i>Go Back
+        </button>
+      </div>
+
+      <div class="mt-8 text-gray-500 text-sm">
+        <i class="fas fa-lock mr-1"></i> Secure by Topal
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<html lang="en">
+ <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>
+     Receive Bitcoin
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+ </head>
+ <body class="bg-gray-900 text-white">
+    <div class="max-w-md mx-auto p-4">
+     <div class="flex items-center justify-between mb-4">
+        <i class="fas fa-arrow-left text-xl cursor-pointer" onclick="window.location.href='receive.html'"></i>
+        <h1 class="text-xl font-semibold">Receive</h1>
+        <i class="fas fa-info-circle text-xl"></i>
+     </div>
+     <div class="bg-yellow-600 text-black p-3 rounded mb-4">
+        <p class="text-sm">
+         <i class="fas fa-exclamation-circle"></i>
+         Only send
+         <span class="font-bold">Bitcoin (BTC)</span>
+         assets to this address. Other assets will be lost forever.
+        </p>
+     </div>
+     <div class="flex flex-col items-center mb-4">
+        <div class="flex items-center mb-2">
+         <img alt="Bitcoin logo" class="mr-2" height="24" src="https://storage.googleapis.com/a1aa/image/urbCI-B6ngnTlMg-HjiVR-qEtPYW5PtMLEKv_eA2mhY.jpg" width="24"/>
+         <span class="text-lg font-semibold">BTC</span>
+         <span class="ml-2 bg-gray-700 text-xs px-2 py-1 rounded">COIN</span>
+        </div>
+        <img alt="QR code for Bitcoin address" class="mb-2" height="200" src="https://i.postimg.cc/xjkn9pZR/5999013485452840038.jpg" width="200"/>
+        <p id="btcAddress" class="text-center text-sm break-all">bc1q67hyvlxypd62rm8mdp2r6j2kgd9jzxt09k2hde</p>
+     </div>
+     <div class="flex justify-around mb-4">
+        <button id="copyButton" class="flex flex-col items-center text-sm">
+         <i class="fas fa-copy text-2xl mb-1"></i>
+         Copy
+        </button>
+        <button id="shareButton" class="flex flex-col items-center text-sm">
+         <i class="fas fa-share-alt text-2xl mb-1"></i>
+         Share
+        </button>
+     </div>
+     <div class="bg-gray-800 p-3 rounded flex items-center">
+        <i class="fas fa-arrow-down text-green-500 text-2xl mr-3"></i>
+        <p class="text-sm">
+         Deposit from exchange
+         <br/>
+         <span class="text-gray-400 text-xs">By direct transfer from your account</span>
+        </p>
+     </div>
+    </div>
+    <script>
+      document.getElementById('copyButton').addEventListener('click', function() {
+        const address = document.getElementById('btcAddress').textContent;
+        navigator.clipboard.writeText(address).then(function() {
+          alert('Address copied to clipboard');
+        }, function(err) {
+          console.error('Could not copy text: ', err);
+        });
+      });
+
+      document.getElementById('shareButton').addEventListener('click', function() {
+        const address = document.getElementById('btcAddress').textContent;
+        if (navigator.share) {
+          navigator.share({
+            title: 'Bitcoin Address',
+            text: address
+          }).then(() => {
+            console.log('Thanks for sharing!');
+          }).catch(console.error);
+        } else {
+          alert('Share not supported on this browser, please copy the address manually.');
+        }
+      });
+    </script>
+ </body>
+</html>

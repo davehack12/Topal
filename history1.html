@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transaction History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        rel="stylesheet"
+    />
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <header class="flex items-center p-4">
+        <a href="home.html" class="mr-4">
+            <i class="fas fa-arrow-left text-white text-xl"></i>
+        </a>
+        <div class="relative flex-1">
+            <input
+                type="text"
+                placeholder="Search"
+                class="w-full bg-gray-800 text-white rounded-full py-2 pl-10 pr-4 focus:outline-none"
+            />
+            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+    </header>
+    <main class="px-4">
+        <h1 class="text-xl font-semibold mb-4 text-center">Transaction History</h1>
+        <section class="mb-8">
+            <button class="w-full bg-gray-800 text-white rounded-full py-2 flex items-center justify-center">
+                <span>All Networks</span>
+                <i class="fas fa-chevron-down ml-2"></i>
+            </button>
+        </section>
+        <!-- Dummy Transaction -->
+        <section class="mb-4">
+            <div class="bg-gray-800 p-4 rounded-lg">
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                <div>
+                    <p class="font-medium">Bonuse</p>
+                    <small class="text-gray-400">Date: 2025-03-25</small>
+                </div>
+                <div class="text-green-500 font-semibold">+0.0 BTC</div>
+                </div>
+                <div class="flex justify-between items-center">
+                <div>
+                    <p class="font-medium">Bonuse</p>
+                    <small class="text-gray-400">Date: 2025-03-27</small>
+                </div>
+                <div class="text-green-500 font-semibold">+1.0 USDT</div>
+                </div>
+            </div>
+            </div>
+        </section>
+            </div>
+        </section>
+        
+    </main>
+</body>
+</html>

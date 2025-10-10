@@ -1,0 +1,52 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Digital Assets</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+        <style>
+            /* 3D effect for the app name */
+            .threeD {
+                font-size: 3rem;
+                font-weight: 900;
+                color: #fff;
+                text-align: center;
+                margin-bottom: 1rem;
+                text-shadow: 2px 2px 0 #000, 4px 4px 0 #333, 6px 6px 0 #666;
+            }
+        </style>
+    </head>
+    <body class="bg-gradient-to-br from-gray-900 to-black text-white min-h-screen flex flex-col items-center justify-center px-4">
+        <!-- 3D Styled App Name -->
+        <h2 class="threeD">Topal</h2>
+        <div class="w-full max-w-md bg-gray-800 rounded-xl shadow-lg p-8">
+            <div class="flex justify-center">
+                <img src="https://storage.googleapis.com/a1aa/image/xFD_JWtV-HqPnu98kYXphREv8HUZ46FdpkJZ6TYqJRs.jpg" alt="Digital assets illustration" class="w-48 rounded-full transform hover:scale-105 transition duration-300 ease-in-out"/>
+            </div>
+            <div class="mt-6 text-center">
+                <h1 class="text-3xl font-extrabold">
+                    Own, control &amp; leverage your digital assets
+                </h1>
+                <p class="mt-2 text-gray-400 text-sm">
+                    Seamlessly manage and grow your digital portfolio.
+                </p>
+            </div>
+            <div class="mt-8 space-y-4">
+                <button onclick="window.location.href='signup.html'" class="w-full bg-green-500 text-black py-3 rounded-full text-lg font-semibold hover:bg-green-600 transition">
+                    Create New Wallet
+                </button>
+                <button onclick="window.location.href='login.html'" class="w-full bg-gray-700 text-white py-3 rounded-full text-lg font-semibold hover:bg-gray-600 transition">
+                    I Already Have a Wallet
+                </button>
+            </div>
+            <div class="mt-6 text-center text-gray-500 text-xs">
+                <p>
+                    By tapping any button you agree to our
+                    <a href="#" class="underline hover:text-white">Terms of Service</a> and
+                    <a href="#" class="underline hover:text-white">Privacy Policy</a>.
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
