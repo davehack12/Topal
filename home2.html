@@ -1,0 +1,227 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Crypto Wallet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script>
+      function toggleBalance(balanceId, iconId) {
+        const balance = document.getElementById(balanceId);
+        const eyeIcon = document.getElementById(iconId);
+        if (balance.style.display === "none") {
+          balance.style.display = "inline";
+          eyeIcon.classList.replace("fa-eye-slash", "fa-eye");
+        } else {
+          balance.style.display = "none";
+          eyeIcon.classList.replace("fa-eye", "fa-eye-slash");
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-gray-950 text-white font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header
+      class="bg-gradient-to-r from-green-500 to-emerald-700 p-4 flex justify-between items-center shadow-md"
+    >
+      <i class="fas fa-cog text-2xl cursor-pointer"></i>
+      <h1 class="text-xl font-bold tracking-wide">Home</h1>
+      <i class="fas fa-qrcode text-2xl cursor-pointer"></i>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="p-4">
+      <div class="relative">
+        <input
+          class="w-full p-3 pl-12 bg-gray-800 rounded-full text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+          placeholder="Search tokens, NFTs..."
+          type="text"
+        />
+        <i
+          class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+        ></i>
+      </div>
+    </div>
+
+    <!-- Wallet Info -->
+    <section class="p-4 space-y-4">
+      <div
+        class="bg-gray-800/70 backdrop-blur-md p-5 rounded-2xl shadow-lg transition hover:bg-gray-800"
+      >
+        <div class="flex justify-between items-center mb-3">
+          <p class="text-gray-400 text-sm">Main Wallet 1</p>
+          <i
+            id="eye-icon1"
+            class="fas fa-eye cursor-pointer text-gray-300"
+            onclick="toggleBalance('balance1','eye-icon1')"
+          ></i>
+        </div>
+        <p class="text-3xl font-bold" id="balance1">$1.00</p>
+      </div>
+
+      <div
+        class="bg-gray-800/70 backdrop-blur-md p-5 rounded-2xl shadow-lg transition hover:bg-gray-800"
+      >
+        <div class="flex justify-between items-center mb-3">
+          <p class="text-gray-400 text-sm">Main Wallet 2</p>
+          <i
+            id="eye-icon2"
+            class="fas fa-eye cursor-pointer text-gray-300"
+            onclick="toggleBalance('balance2','eye-icon2')"
+          ></i>
+        </div>
+        <p class="text-3xl font-bold" id="balance2">$0.00</p>
+        <p class="text-green-400 text-sm mt-1 uppercase">Deposit Active</p>
+      </div>
+    </section>
+           
+
+     <div class="mt-6 space-y-3">
+        <button
+          onclick="window.location.href='lock.html'"
+          class="w-full py-3 bg-green-500 rounded-full text-black font-semibold hover:bg-green-400 transition"
+        >
+         Lock Wallet
+        </button>
+
+
+
+    <!-- Action Buttons -->
+    <section class="p-4">
+      <div class="grid grid-cols-5 gap-3 text-center">
+        <a href="send.html" class="group">
+          <div
+            class="p-4 bg-gray-800 rounded-xl group-hover:bg-green-600 transition"
+          >
+            <i class="fas fa-paper-plane text-2xl"></i>
+          </div>
+          <p class="mt-1 text-sm">Send</p>
+        </a>
+        <a href="receive.html" class="group">
+          <div
+            class="p-4 bg-gray-800 rounded-xl group-hover:bg-green-600 transition"
+          >
+            <i class="fas fa-arrow-down text-2xl"></i>
+          </div>
+          <p class="mt-1 text-sm">Receive</p>
+        </a>
+        <a href="buy.html" class="group">
+          <div
+            class="p-4 bg-gray-800 rounded-xl group-hover:bg-green-600 transition"
+          >
+            <i class="fas fa-credit-card text-2xl"></i>
+          </div>
+          <p class="mt-1 text-sm">Buy</p>
+        </a>
+        <a href="sell.html" class="group">
+          <div
+            class="p-4 bg-gray-800 rounded-xl group-hover:bg-green-600 transition"
+          >
+            <i class="fas fa-university text-2xl"></i>
+          </div>
+          <p class="mt-1 text-sm">Sell</p>
+        </a>
+        <a href="history2.html" class="group">
+          <div
+            class="p-4 bg-gray-800 rounded-xl group-hover:bg-green-600 transition"
+          >
+            <i class="fas fa-history text-2xl"></i>
+          </div>
+          <p class="mt-1 text-sm">History</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Advertisement / Promo -->
+    <section class="p-4">
+      <div
+        class="bg-gradient-to-r from-gray-800 to-gray-900 p-4 rounded-2xl flex justify-between items-center"
+      >
+        <div class="flex items-center space-x-3">
+          <img
+            src="https://storage.googleapis.com/a1aa/image/WfnxdWI800xDysufOI5x4rzW3vwA0oYww05lOyuH5R4.jpg"
+            alt="Piggy bank"
+            class="w-12 h-12 rounded-full"
+          />
+          <div>
+            <p class="text-sm">Earn up to 30% yield on-chain</p>
+            <a href="#" class="text-green-500 font-medium text-sm"
+              >Start earning <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+        <i class="fas fa-times text-gray-400 cursor-pointer"></i>
+      </div>
+    </section>
+
+    <!-- Crypto Section -->
+    <main class="flex-1 p-4">
+      <div class="flex justify-between">
+        <p class="text-lg font-semibold">Crypto</p>
+        <p class="text-lg text-gray-500 cursor-pointer">NFTs</p>
+      </div>
+      <div class="h-1 bg-green-500 w-20 mt-2 rounded-full"></div>
+
+      <div class="mt-4 space-y-3">
+        <div class="flex justify-between">
+          <p class="text-gray-300">Bitcoin (BTC)</p>
+          <p class="font-semibold">0.29 BTC</p>
+        </div>
+        <div class="flex justify-between">
+          <p class="text-gray-300">Ethereum (ETH)</p>
+          <p class="font-semibold">0.00 ETH</p>
+        </div>
+      </div>
+
+      <div class="mt-6 space-y-3">
+        <button
+          onclick="window.location.href='buy.html'"
+          class="w-full py-3 bg-green-500 rounded-full text-black font-semibold hover:bg-green-400 transition"
+        >
+          Buy Crypto
+        </button>
+        <button
+          onclick="window.location.href='receive.html'"
+          class="w-full py-3 bg-gray-800 rounded-full text-white font-semibold hover:bg-gray-700 transition"
+        >
+          Deposit Crypto
+        </button>
+      </div>
+
+      <div class="mt-4 text-center">
+        <a href="#" class="text-green-500 text-sm">Manage crypto</a>
+      </div>
+    </main>
+
+    <!-- Footer Navigation -->
+    <footer
+      class="fixed bottom-0 left-0 right-0 bg-gray-900/90 backdrop-blur-md p-3 border-t border-gray-800"
+    >
+      <div class="flex justify-around text-center">
+        <a href="home2.html" class="flex flex-col items-center">
+          <i class="fas fa-home text-green-500 text-xl"></i>
+          <p class="text-green-500 text-xs mt-1">Home</p>
+        </a>
+        <a href="trending.html" class="flex flex-col items-center">
+          <i class="fas fa-chart-line text-gray-400 text-xl"></i>
+          <p class="text-gray-400 text-xs mt-1">Trending</p>
+        </a>
+        <a href="swap.html" class="flex flex-col items-center">
+          <i class="fas fa-exchange-alt text-gray-400 text-xl"></i>
+          <p class="text-gray-400 text-xs mt-1">Swap</p>
+        </a>
+        <a href="earn.html" class="flex flex-col items-center">
+          <i class="fas fa-piggy-bank text-gray-400 text-xl"></i>
+          <p class="text-gray-400 text-xs mt-1">Earn</p>
+        </a>
+        <a href="discover.html" class="flex flex-col items-center">
+          <i class="fas fa-compass text-gray-400 text-xl"></i>
+          <p class="text-gray-400 text-xs mt-1">Discover</p>
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>
